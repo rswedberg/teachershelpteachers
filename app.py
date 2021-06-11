@@ -6,13 +6,13 @@ from flask import Flask, render_template, request, redirect
 # Initialize Flask
 app = Flask(__name__)
 
-# Home page that routes users to create page or retrieve page
+# Home page that routes user to create page or retrieve page
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
         return render_template("index.html")
     else:
-        # Determine if user selects the create button or the retrieve button
+        # Determine if user selects teh create button or the retrieve button
         if request.form.get("route") == "create":
             return redirect("/create")
         else:
@@ -34,8 +34,11 @@ def create():
             sample = ""
             # Iterate through each string in list
             for i in range(0,len(question)):
-                # Check for substring to identify random integer
-                if "int" and "{" and "," and "}" in question[i]:
+                # Check for substring to idetify random integer
+                if ("int" in question[i]
+                and "{" in question[i]
+                and "," in question[i]
+                and "}" in question[i]):
                     # Separate substring to get minimum and maximum values
                     string = re.split('{|,|}', question[i])
                     minRange = int(string[1])
@@ -58,8 +61,8 @@ def create():
             # TODO
             return render_template("confirm.html")
 
-# Retrieve questions from database
+# Retrieve questions from databse
 @app.route("/retrieve")
 def retrieve():
-    # TODO
+    # TODO 
     return render_template("retrieve.html")
