@@ -2,6 +2,7 @@
 Teachers Help Teachers
 
 ## Description
+The goal of this project is to create a public, open source resource for computer science educators to be able to create and share practice programming questions. These questions will be in the form of templates created by our end-users — computer science teachers — with the intention of being shared with other teachers. Each question template will contain aspects that can be randomized within given parameters meaning that each question template can provide multiple practice programming problems for students over a given topic. Teachers will be able to browse the entries of their peers and draw from them to create assignments and assessments to use themselves. 
 
 
 ## Visuals
