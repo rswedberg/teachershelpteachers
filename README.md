@@ -41,7 +41,8 @@ flask run --cert=adhoc
 ## Contributing
 
 
-## License
+## License 
 
 
 ## Project Status
+6-24 Preview question is working. We can navigate between screens. Everything has a location that backend code can be deposited into.
