@@ -177,10 +177,16 @@ def logout():
     return redirect("/")
 
 # Retrieve questions from databse
-@app.route("/retrieve")
+@app.route("/retrieve", methods=["GET", "POST"])
 def retrieve():
-    # TODO
-    return render_template("retrieve.html")
+    if request.method == "GET":
+        return render_template("retrieve.html")
+    else:
+        # TODO
+        if request.form.get("route") == "create":
+            return redirect("/create")
+        else:
+            return render_template("retrieve.html")
 
 if __name__ == "__main__":
     app.run(ssl_context="adhoc")
