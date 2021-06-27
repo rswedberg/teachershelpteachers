@@ -18,9 +18,8 @@ from oauthlib.oauth2 import WebApplicationClient
 import requests
 
 # Internal imports
+from db_execute import User, Questions
 from db import init_db_command
-from user import User
-
 # Configuration
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
@@ -177,16 +176,10 @@ def logout():
     return redirect("/")
 
 # Retrieve questions from databse
-@app.route("/retrieve", methods=["GET", "POST"])
+@app.route("/retrieve")
 def retrieve():
-    if request.method == "GET":
-        return render_template("retrieve.html")
-    else:
-        # TODO
-        if request.form.get("route") == "create":
-            return redirect("/create")
-        else:
-            return render_template("retrieve.html")
+    # TODO
+    return render_template("retrieve.html")
 
 if __name__ == "__main__":
     app.run(ssl_context="adhoc")

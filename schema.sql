@@ -4,3 +4,8 @@ CREATE TABLE user (
   email TEXT UNIQUE NOT NULL,
   profile_pic TEXT NOT NULL
 );
+
+CREATE TABLE questions (
+  category TEXT NOT NULL,
+  question TEXT NOT NULL
+);
