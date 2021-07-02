@@ -3,10 +3,7 @@
 <head>
   <title>HOMEPAGE</title>
   <meta charset="UTF-45">
-  <style>
-  body {background-color:#99FF99; }
-  h1 {color:#330099; }
-  </style>
+ <link rel ="stylesheet" href="style.css">
 </head>
 <body>
 <h1>
