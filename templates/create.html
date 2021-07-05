@@ -5,11 +5,13 @@
 </head>
 <body>
   <form action="/create" method="post">
+    <input name="category" type="text"> </input>
+    <br />
     <textarea name="code" rows="30" cols="30" placeholder="Enter code here"></textarea>
     <br />
     <button name="action" value="view">View</button>
     <br />
-    <textarea name="preview" rows="30" cols="30" readonly>{{ sample }}</textarea>
+    <textarea rows="30" cols="30" readonly>{{ sample }}</textarea>
     <br />
     <button name="action" value="store">Store</button>
   </form>
