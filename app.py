@@ -68,10 +68,11 @@ def create():
     else:
         question = []
         category = request.form.get("category")
+        raw_question = request.form.get("code")
         # Create a sample randomized question for user to view
         if request.form.get("action") == "view":
             # Separate string with | delimeter into list
-            question = request.form.get("code").split('|')
+            question = raw_question.split('|')
             sample = ""
             # Iterate through each string in list
             for i in range(0,len(question)):
@@ -96,10 +97,13 @@ def create():
                 else:
                     # Append question component to sample question
                     sample += question[i]
-            return render_template("create.html", sample=sample)
+            return render_template("create.html", sample=sample, category=category, raw_question=raw_question)
         # Store question list into database
         else:
-            # TODO
+            # Get user
+            user = current_user.email
+            # Store to database
+            Questions.create(user, category, raw_question)
             return render_template("confirm.html")
 
 @app.route("/login")

@@ -35,7 +35,7 @@ class User(UserMixin):
 
 class Questions():
     @staticmethod
-    def get(categegory):
+    def get_from_category(categegory):
         db = get_db()
         question = db.execute(
             "SELECT * FROM questions WHERE category = ?", (category)
@@ -44,11 +44,29 @@ class Questions():
             return None
         return question
 
+    def get_from_author(author):
+        db = get_db()
+        question = db.execute(
+            "SELECT * FROM questions WHERE author = ?", (author)
+        ).fetchone()
+        if not question:
+            return None
+        return question
+
+    def get(author, category):
+        db = get_db()
+        question = db.execute(
+            "SELECT * FROM questions WHERE author = ? AND category = ?", (author, category)
+        ).fetchone()
+        if not question:
+            return None
+        return question
+
     @staticmethod
-    def create(category, question):
+    def create(author, category, question):
         db = get_db()
         db.execute(
-            "INSERT INTO questions (category, question) "
-            "VALUES (?, ?)", (category, question)
+            "INSERT INTO questions (author, category, question) "
+            "VALUES (?, ?, ?)", (author, category, question)
         )
         db.commit()

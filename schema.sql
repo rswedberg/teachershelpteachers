@@ -6,6 +6,7 @@ CREATE TABLE user (
 );
 
 CREATE TABLE questions (
+  author TEXT NOT NULL,
   category TEXT NOT NULL,
   question TEXT NOT NULL
 );

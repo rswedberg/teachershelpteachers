@@ -6,9 +6,9 @@
 </head>
 <body>
   <form action="/create" method="post">
-    <input name="category" type="text"> </input>
+    <input name="category" type="text" value="{{ category }}"> </input>
     <br />
-    <textarea name="code" rows="30" cols="30" placeholder="Enter code here"></textarea>
+    <textarea name="code" rows="30" cols="30" placeholder="Enter code here">{{ raw_question }}</textarea>
     <br />
     <button name="action" value="view">View</button>
     <br />
@@ -18,4 +18,3 @@
   </form>
 </body>
 </html>
- 
