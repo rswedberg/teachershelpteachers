@@ -35,11 +35,11 @@ class User(UserMixin):
 
 class Questions():
     @staticmethod
-    def get_from_category(categegory):
+    def get_from_category(category):
         db = get_db()
         question = db.execute(
-            "SELECT * FROM questions WHERE category = ?", (category)
-        ).fetchone()
+            "SELECT question FROM questions WHERE category = ?", (category,)
+        ).fetchall()
         if not question:
             return None
         return question
@@ -47,17 +47,26 @@ class Questions():
     def get_from_author(author):
         db = get_db()
         question = db.execute(
-            "SELECT * FROM questions WHERE author = ?", (author)
-        ).fetchone()
+            "SELECT question FROM questions WHERE author = ?", (author,)
+        ).fetchall()
         if not question:
             return None
         return question
 
-    def get(author, category):
+    def get_from_both(author, category):
         db = get_db()
         question = db.execute(
-            "SELECT * FROM questions WHERE author = ? AND category = ?", (author, category)
-        ).fetchone()
+            "SELECT question FROM questions WHERE author = ? AND category = ?", (author, category)
+        ).fetchall()
+        if not question:
+            return None
+        return question
+
+    def get():
+        db = get_db()
+        question = db.execute(
+            "SELECT question FROM questions"
+        ).fetchall()
         if not question:
             return None
         return question
