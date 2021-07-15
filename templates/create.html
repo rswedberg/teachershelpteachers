@@ -8,6 +8,30 @@
   <form action="/create" method="post">
     <input name="category" type="text" value="{{ category }}"> </input>
     <br />
+    <p>Instructions:
+      -Write your question template followed by a triple dash ---
+      -You can create parameters that will have randomized values
+      by writing @ + capital letters starting with A
+      -parameters can be integers, floats, or strings
+      -After the triple dash, on separate lines and in order list
+      the letter, datatype, and other customization in the following
+      format (upper and lower bounds are inclusive)
+
+Integers - letter, int, lowerbound, upperbound
+Floats - letter, float, # of decimal values, lowerbound, upperbound
+Strings - letter, str, item1, item2, ...
+
+Ex.
+num = @A
+if num @B @C:
+    print("1")
+else:
+    print("2")
+---
+A, int, 1, 8
+B, str, >, <, !=
+C, float, 1, 0, 9.5</p>
+    <br />
     <textarea name="code" rows="30" cols="30" placeholder="Enter code here">{{ raw_question }}</textarea>
     <br />
     <button name="action" value="view">View</button>

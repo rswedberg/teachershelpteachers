@@ -4,10 +4,6 @@
   <title>HOMEPAGE</title>
   <meta charset="UTF-45">
   <link rel="stylesheet" href="style.css">
-  <style>
-  body {background-color:#99FF99; }
-  h1 {color:#330099; }
-  </style>
 </head>
 <body>
 <h1>
@@ -33,19 +29,27 @@
 
   </select>
   </p2>
+  <br />
+  <br />
+  <textarea name="numQs" rows="1" cols="30" placeholder="#">{{ numQs }}</textarea>
+  <br />
+  <br />
+  <textarea name="author" rows="1" cols="30" placeholder="author">{{ author }}</textarea>
+  <br />
+  <br />
+  <textarea name="category" rows="1" cols="10" placeholder="category">{{ category }}</textarea>
+  <br />
+    <textarea rows="30" cols="30" readonly>{{ questions }}</textarea>
+    <br />
   <p3>
-    <! I can't fingure out how to put a  for the output here box here. -->
+    <!-- I can't fingure out how to put a  for the output here box here. -->
     <output name="result"></output>
   </p3>
   <br>
     <p4>
-      <button class="button">Begin Search</button>
     </p4>
     <br>
-    <br>
-    <br>
-    <br>
-    <button class="button" name="route" value="create">Make a question</button>
+    <button class="button" name="route" value="create">Get random questions</button>
 </form>
 
 </html>
