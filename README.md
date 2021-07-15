@@ -46,3 +46,8 @@ flask run --cert=adhoc
 
 ## Release Notes
 6-24 Preview question is working. We can navigate between screens. Everything has a location that backend code can be deposited into.
+7-15 
+  -Users can enter question templates, view previews of randomized parameters for their templates or see if an error occurred
+  -Users can push questions templates to the database. Each template has an associated auther (based on the user's email for login) and category entered by the user in a textbox
+  -Users can get questions from the database with the randomized parameters filled in. Questions can be retrieved with the filters of author, category, both, or neither
+  -Navigation bar added
