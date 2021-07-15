@@ -6,11 +6,21 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="topnav">
+  <a class="active" href="#home">Home</a>
+  <a href="#retrieve">Retrieve Question</a>
+  <a href="#create">Create Question</a>
+  <a href="#previous">Your Previously Used Questions</a>
+</div>
 <h1>
   Welcome to our Teacher Help Teachers homepage
 </h1>
 <form action="/retrieve" method="post">
   <p1>
+    <button name="home">Back To Home</button>
+  </p1>
+  <br>
+  <p2>
   <label for="choices"> Choose a problem type: </label>
   <select name= "cars" id="cars">
     <optgroup label="something">
@@ -20,14 +30,41 @@
       <option value="code type 2">CODE 2</option>
     </optgroup>
   </select>
-  </p1>
+  </p2>
   <br>
-  <p2>
+  <p3>
+    <label for="author"> Choose an author: </label>
+    <select name="author1" id="author1">
+      <option value="author2"> Author 1 </option>
+      </select>
+  </p3>
+  <br>
+  <p4>
   <label for="Number of problems"> How many questions would you like?: </label>
   <select name= "one" id="one">
-      <option value="value 1-20"> value 1-20</option>
+      <option value="numQs"> 1</option>
+      <option value="numQs"> 2</option>
+      <option value="numQs"> 3</option>
+      <option value="numQs"> 4</option>
+      <option value="numQs"> 5</option>
+      <option value="numQs"> 6</option>
+      <option value="numQs"> 7</option>
+      <option value="numQs"> 8</option>
+      <option value="numQs"> 9</option>
+      <option value="numQs"> 10</option>
+      <option value="numQs"> 11</option>
+      <option value="numQs"> 12</option>
+      <option value="numQs"> 13</option>
+      <option value="numQs"> 14</option>
+      <option value="numQs"> 15</option>
+      <option value="numQs"> 16</option>
+      <option value="numQs"> 17</option>
+      <option value="numQs"> 18</option>
+      <option value="numQs"> 19</option>
+      <option value="numQs"> 20</option>
 
   </select>
+<<<<<<< HEAD
   </p2>
   <br />
   <br />
@@ -43,13 +80,32 @@
     <br />
   <p3>
     <!-- I can't fingure out how to put a  for the output here box here. -->
+=======
+  </p4>
+  <p5>
+    <! I can't fingure out how to put a  for the output here box here. -->
+>>>>>>> a551383bf20d45b7ae0ea5ac65f9e5c821e9dbfe
     <output name="result"></output>
-  </p3>
+  </p5>
   <br>
+<<<<<<< HEAD
     <p4>
     </p4>
     <br>
     <button class="button" name="route" value="create">Get random questions</button>
+=======
+    <p6>
+      <button class="button">Begin Search</button>
+    </p6>
+    <br>
+    <p7>
+      <textarea name="questions" rows="10" cols="30" placeholder="Questions will appear here"> </textarea>
+    </p7>
+    <br>
+    <br>
+    <br>
+    <button class="button" name="route" value="create">Make a question</button>
+>>>>>>> a551383bf20d45b7ae0ea5ac65f9e5c821e9dbfe
 </form>
 
 </html>
