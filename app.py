@@ -48,7 +48,7 @@ def load_user(user_id):
     return User.get(user_id)
 
 # Home page that routes user to create page or retrieve page
-@app.route("/", methods=["GET")
+@app.route("/", methods=["GET"])
 def index():
     if current_user.is_authenticated:
         return render_template("index.html")
@@ -155,11 +155,13 @@ def logout():
 @app.route("/retrieve", methods=["GET", "POST"])
 def retrieve():
     if request.method == "GET":
-        return render_template("retrieve.html")
+        categories = Questions.get_categories()
+        return render_template("retrieve.html", categories=categories)
     else:
         # POST
+        categories = Questions.get_categories()
         method = request.form.get("search_method")
-        category = request.form.get("category")
+        category = request.form.get("categories")
         author = request.form.get("author")
         data = []
         if method == 'category':
@@ -178,7 +180,7 @@ def retrieve():
             item = data[randomIndex]
             questions += generateQuestion(item[0]) + "\n^^^^^^^\n"
         #questions = [data[0], str(data), type(data), len(data)]
-        return render_template("retrieve.html", questions=questions)
+        return render_template("retrieve.html", questions=questions, categories=categories)
 
 def generateQuestion(template):
     #print(template)

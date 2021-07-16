@@ -14,14 +14,19 @@
 <form action="/retrieve" method="post">
   <label for="search_method">Question search method: </label>
   <select name="search_method" id="search_method">
-    <option disabled selected></option>
+    <option disabled selected>Method</option>
     <option value="category">Category Only</option>
     <option value="author">Author Only</option>
     <option value="both">Category & Author</option>
   </select>
   <br />
   <label for="choices"> Choose a Category: </label>
-  <input type="text" name="category">
+  <select name="categories" id="category_choice">
+    <option disabled selected>Select Category</option>
+    {% for category in categories %}
+      <option value="{{ category }}">{{ category }}</option>
+    {% endfor %}
+  </select>
   <br />
   <p3>
     <label for="author"> Choose an author: </label>

@@ -1,4 +1,5 @@
 from flask_login import UserMixin
+from collections import OrderedDict
 
 from db import get_db
 
@@ -64,10 +65,15 @@ class Questions():
 
     def get_categories():
         db = get_db()
-        email = "rswedberg@unomahae.edu"
-        category = db.execute(
-            "SELECT category FROM questions WHERE author = ?", (email)
+        db_call = db.execute(
+            "SELECT category FROM questions"
         ).fetchall()
+        list = []
+        for i in range(len(db_call)):
+            cat = db_call[i]
+            list.append(cat[0])
+        raw_cat = OrderedDict.fromkeys(list)
+        category = sorted(raw_cat, key = lambda s: s.casefold())
         if not category:
             return None
         return category
