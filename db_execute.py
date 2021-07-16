@@ -62,6 +62,16 @@ class Questions():
             return None
         return question
 
+    def get_categories():
+        db = get_db()
+        email = "rswedberg@unomahae.edu"
+        category = db.execute(
+            "SELECT category FROM questions WHERE author = ?", (email)
+        ).fetchall()
+        if not category:
+            return None
+        return category
+
     def get():
         db = get_db()
         question = db.execute(

@@ -28,7 +28,10 @@ GOOGLE_DISCOVERY_URL = (
 )
 
 # Initialize Flask
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__, template_folder='templates', static_folder="static")
+    return app
+app = create_app()
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 
 # User session management setup
@@ -201,7 +204,7 @@ def retrieve():
             numQs = int(request.form.get("numQs"))
         except:
             numQs = 1
-        
+
         if author != "" and category != "":
             data = Questions.get_from_both(author, category)
         elif author != "":
@@ -217,11 +220,11 @@ def retrieve():
             item = data[randomIndex]
             questions += generateQuestion(item[0]) + "\n^^^^^^^\n"
         #questions = [data[0], str(data), type(data), len(data)]
-        
+
 
         return render_template("retrieve.html", questions=questions)
 
-    
+
 
 '''
 Instructions:
@@ -281,7 +284,7 @@ def generateQuestion(template):
                 #print(stringList)
                 randomStr = random.choice(stringList)
                 randomVals.append(randomStr)
-        
+
         #replace parameter string with generated values
         for i in range(len(parameters)):
             index = question.find("@")

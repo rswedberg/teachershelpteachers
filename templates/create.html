@@ -2,35 +2,55 @@
 <hmtl>
 <head>
   <title>Create Questions</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-  <form action="/create" method="post">
-    <input name="category" type="text" value="{{ category }}"> </input>
-    <br />
-    <p>Instructions:
-      -Write your question template followed by a triple dash ---
-      -You can create parameters that will have randomized values
-      by writing @ + capital letters starting with A
-      -parameters can be integers, floats, or strings
-      -After the triple dash, on separate lines and in order list
+  <div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="/retrieve">Retrieve Question</a>
+    <a href="/create">Create Question</a>
+  </div>
+  <p>Instructions:
+    <ul>
+      <li>Write your question template followed by a triple dash ---</li>
+      <li>You can create parameters that will have randomized values
+      by writing @ + capital letters starting with A</li>
+      <li>parameters can be integers, floats, or strings</li>
+      <li>After the triple dash, on separate lines and in order list
       the letter, datatype, and other customization in the following
-      format (upper and lower bounds are inclusive)
-
-Integers - letter, int, lowerbound, upperbound
-Floats - letter, float, # of decimal values, lowerbound, upperbound
-Strings - letter, str, item1, item2, ...
-
-Ex.
-num = @A
-if num @B @C:
-    print("1")
-else:
-    print("2")
----
-A, int, 1, 8
-B, str, >, <, !=
-C, float, 1, 0, 9.5</p>
+      format (upper and lower bounds are inclusive)</li>
+    </ul>
+  </p>
+  <p>
+    Integers - letter, int, lowerbound, upperbound
+    <br />
+    Floats - letter, float, # of decimal values, lowerbound, upperbound
+    <br />
+    Strings - letter, str, item1, item2, ...
+  </p>
+  <p>
+    Ex.
+    <br />
+    num = @A
+    <br />
+    if num @B @C:
+    <br />
+    &emsp; print("1")
+    <br />
+    else:
+    <br />
+    &emsp; print("2")
+    <br />
+    ---
+    <br />
+    A, int, 1, 8
+    <br />
+    B, str, >, <, !=
+    <br />
+    C, float, 1, 0, 9.5
+  </p>
+  <form action="/create" method="post">
+    <input name="category" type="text" placeholder="Category" value="{{ category }}"> </input>
     <br />
     <textarea name="code" rows="30" cols="30" placeholder="Enter code here">{{ raw_question }}</textarea>
     <br />
@@ -39,10 +59,7 @@ C, float, 1, 0, 9.5</p>
     <textarea rows="30" cols="30" readonly>{{ sample }}</textarea>
     <br />
     <button name="action" value="store">Store</button>
-  
+
   </form>
-  <p1>
-  <button value="home"> Back to Home </button>
-  </p1>
 </body>
 </html>
