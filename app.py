@@ -48,19 +48,12 @@ def load_user(user_id):
     return User.get(user_id)
 
 # Home page that routes user to create page or retrieve page
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET")
 def index():
-    if request.method == "GET":
-        if current_user.is_authenticated:
-            return render_template("index.html")
-        else:
-            return render_template("login.html")
+    if current_user.is_authenticated:
+        return render_template("index.html")
     else:
-        # Determine if user selects teh create button or the retrieve button
-        if request.form.get("route") == "create":
-            return redirect("/create")
-        else:
-            return redirect("/retrieve")
+        return render_template("login.html")
 
 # Create new question page
 # Allow preview of sample question before storing question
@@ -78,36 +71,6 @@ def create():
             sample = generateQuestion(raw_question)
             return render_template("create.html", sample=sample, category=category, raw_question=raw_question)
             # Separate string with | delimeter into list
-
-            '''
-            question = raw_question.split('|')
-            sample = ""
-            # Iterate through each string in list
-            for i in range(0,len(question)):
-                # Check for substring to idetify random integer
-                if ("int" in question[i]
-                and "{" in question[i]
-                and "," in question[i]
-                and "}" in question[i]):
-                    # Separate substring to get minimum and maximum values
-                    string = re.split('{|,|}', question[i])
-                    minRange = int(string[1])
-                    maxRange = int(string[2])
-                    # Append random number in range to the sample question
-                    sample += str(random.randint(minRange,maxRange))
-                # Check for substring to identify random operator
-                elif question[i] == "opp":
-                    # List of operator options
-                    opp = ['+', '-', '*', '/', '%']
-                    # Append random operator to sample question
-                    sample += opp[random.randint(0, len(opp)-1)]
-                # Question components that are not to be randomized
-                else:
-                    # Append question component to sample question
-                    sample += question[i]
-            return render_template("create.html", sample=sample, category=category, raw_question=raw_question)
-        # Store question list into database
-        '''
         else:
             # Get user
             user = current_user.email
@@ -191,66 +154,32 @@ def logout():
 # Retrieve questions from databse
 @app.route("/retrieve", methods=["GET", "POST"])
 def retrieve():
-    # TODO
     if request.method == "GET":
-        # retrieving questions from database
         return render_template("retrieve.html")
     else:
         # POST
-        #questions = get_from_category("selection")
-        author = request.form.get("author")
+        method = request.form.get("search_method")
         category = request.form.get("category")
+        author = request.form.get("author")
+        data = []
+        if method == 'category':
+            data = Questions.get_from_category(category)
+        elif method == 'author':
+            data = Questions.get_from_author(author)
+        else:
+            data = Questions.get_from_both(author, category)
         try:
             numQs = int(request.form.get("numQs"))
         except:
             numQs = 1
-
-        if author != "" and category != "":
-            data = Questions.get_from_both(author, category)
-        elif author != "":
-            data = Questions.get_from_author(author)
-        elif category != "":
-            data = Questions.get_from_category(category)
-        else:
-            data = Questions.get()
-
         questions = ""
         for i in range(numQs):
             randomIndex = random.randint(0, len(data)-1)
             item = data[randomIndex]
             questions += generateQuestion(item[0]) + "\n^^^^^^^\n"
         #questions = [data[0], str(data), type(data), len(data)]
-
-
         return render_template("retrieve.html", questions=questions)
 
-
-
-'''
-Instructions:
--Write your question template followed by a triple dash ---
--You can create parameters that will have randomized values
-by writing @ + capital letters starting with A
--parameters can be integers, floats, or strings
--After the triple dash, on separate lines and in order list
-the letter, datatype, and other customization in the following
-format (upper and lower bounds are inclusive)
-
-Integers - letter, int, lowerbound, upperbound
-Floats - letter, float, # of decimal values, lowerbound, upperbound
-Strings - letter, str, item1, item2, ...
-
-Ex.
-num = @A
-if num @B @C:
-    print("1")
-else:
-    print("2")
----
-A, int, 1, 8
-B, str, >, <, !=
-C, float, 1, 0, 9.5
-'''
 def generateQuestion(template):
     #print(template)
     try:
