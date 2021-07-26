@@ -20,7 +20,7 @@ import requests
 # Internal imports
 from db_execute import User, Questions
 from db import init_db_command
-from auth import login, logout, callback
+#from auth import login, logout, callback
 # Configuration
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
