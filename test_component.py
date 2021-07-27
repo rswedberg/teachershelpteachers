@@ -53,6 +53,84 @@ class TestComponent(unittest.TestCase):
         # Look for string in html to verify previewed code looks as expected
         self.assertIn(b'double num = 3.3;', response.data)
 
+
+    # Test create route for string
+    def test_create_string(self):
+        # Initiate app to run
+        tester = app.test_client(self)
+        # Run post request for /create route passing values for all request.form
+        response = tester.post('/create', data={
+            'category': 'test question',
+            'code': 'String s = @A;---A, str, hi',
+            'action': 'view'
+        }, follow_redirects=True)
+        # Look for string in html to verify previewed code looks as expected
+        self.assertIn(b'String s = hi;', response.data)
+
+    # Test create route for storing a question
+    """     def test_create_store(self):
+        # Initiate app to run
+        tester = app.test_client(self)
+        # Run post request for /create route passing values for all request.form
+        response = tester.post('/create', data={
+            'category': 'test question',
+            'user': 'author.email',
+            'code': 'String s = @A;---A, str, hi',
+            'action': 'store'
+        }, follow_redirects=True)
+        # Look for string in html to verify previewed code looks as expected
+        self.assertIn(b'saved', response.data) """
+
+
+    # Test to verify search is given for the retrieve page
+    def test_retrieve_view(self):
+        # Initiate app to run
+        tester = app.test_client(self)
+        # Run get request for /create route
+        response = tester.get('/retrieve')
+        # Look for string in html file
+        self.assertIn(b'search', response.data)
+    
+
+    # Test retrieve route for category only
+    def test_create_retrieve_cat(self):
+        # Initiate app to run
+        tester = app.test_client(self)
+        # Run post request for /create route passing values for all request.form
+        response = tester.post('/retrieve', data={
+            'search_method': 'category',
+            'categories': 'Milestone Test'
+        }, follow_redirects=True)
+        # Look for string in html to verify previewed code looks as expected
+        self.assertIn(b'^^^^', response.data)
+
+    # Test retrieve route for author only
+    def test_create_retrieve_author(self):
+        # Initiate app to run
+        tester = app.test_client(self)
+        # Run post request for /create route passing values for all request.form
+        response = tester.post('/retrieve', data={
+            'search_method': 'author',
+            'author': 'mzietlow@unomaha.edu'
+        }, follow_redirects=True)
+        # Look for string in html to verify previewed code looks as expected
+        self.assertIn(b'^^^^', response.data)
+
+    # Test retrieve route for both category and author
+    def test_create_retrieve_both(self):
+        # Initiate app to run
+        tester = app.test_client(self)
+        # Run post request for /create route passing values for all request.form
+        response = tester.post('/retrieve', data={
+            'search_method': 'both',
+            'categories': 'Test Question',
+            'author': 'mzietlow@unomaha.edu'
+        }, follow_redirects=True)
+        # Look for string in html to verify previewed code looks as expected
+        self.assertIn(b'^^^^', response.data)
+
+    # ADD TEST FOR MULTIPLE QUESTIONS
+
     # Test that app exists 
     def test_app_exists(self):
         self.assertFalse(current_app is None)
