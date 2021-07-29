@@ -1,19 +1,37 @@
 h1{
 
-  color:#330000
+  color:#000000
   ;
+font-family: fantasy;
+font-size: 48pt;
 }
 body {
-  background-color:#a65959
-  ;}
+  background-color:#FFFFCC;
+  font-family: fantasy;
+  font-size: 24pt;
+}
+button{
+  color:#000000;
+  background-color: #009900;
+font-family: fantasy;
+font-size:38pt;}
+/* changed font family and size of text elements, added green
+ to buttons*/
+
+
+
+
 
  /* Add a black background color to the top navigation */
 .topnav {
   background-color: #333;
   overflow: hidden;
+  font-size: 38pt;}
 }
 
 /* Style the links inside the navigation bar */
+/* increased font size*/
+
 .topnav a {
   float: left;
   color: #f2f2f2;
