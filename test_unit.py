@@ -41,6 +41,14 @@ class TestUnit(unittest.TestCase):
         )
         db.commit()
 
+    def db_clear(self):
+        db_category = "test question"
+        db = get_db()
+        db.execute(
+            "DELETE FROM questions WHERE category = ?", (db_category,)
+        )
+        db.commit()
+
 
 if __name__ == "__main__":
     unittest.main()

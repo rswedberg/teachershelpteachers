@@ -74,7 +74,10 @@ def create():
             # Separate string with | delimeter into list
         else:
             # Get user
-            user = current_user.email
+            try:
+                user = current_user.email
+            except:
+                user = 'test.email'
             # Store to database
             Questions.create(user, category, raw_question)
             return render_template("confirm.html")
