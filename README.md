@@ -46,6 +46,6 @@ flask run --cert=adhoc
 ## Project Status
 
 ## Release Notes
-The entire application is working but needs to be refactored on the backend and
-more organized on the front end to make things look nicer. The tests for the
-application have been started but contain a bug.
+The entire application is working with all features behaving according to the 
+user stories and automated test available to verify all application routes.
+The next step to be done is to deploy the app on Heroku.
