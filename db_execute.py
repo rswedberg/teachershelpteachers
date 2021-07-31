@@ -3,13 +3,31 @@ from collections import OrderedDict
 
 from db import get_db
 
+"""
+This class contains calls to the user table in the databse. Objects of this
+class contain the attributes of id, name, email, and profile picture.
+"""
 class User(UserMixin):
+    """
+    This constructor instatiates a User with an id, name, email, and profile
+    picture.
+    @param user id
+    @param user name
+    @param user email
+    @param user profile picture
+    """
     def __init__(self, id_, name, email, profile_pic):
         self.id = id_
         self.name = name
         self.email = email
         self.profile_pic = profile_pic
 
+    """
+    This static method uses the user id to return all the attributes of a
+    user object that were saved in a databse.
+    @param user id
+    @return user object attributes
+    """
     @staticmethod
     def get(user_id):
         db = get_db()
@@ -24,6 +42,14 @@ class User(UserMixin):
         )
         return user
 
+    """
+    This static method creates a new row in a database for all four attribtues
+    of the user object.
+    @param user id
+    @param user name
+    @param user email
+    @param user profile picture
+    """
     @staticmethod
     def create(id_, name, email, profile_pic):
         db = get_db()
@@ -34,7 +60,16 @@ class User(UserMixin):
         )
         db.commit()
 
+"""
+This class contains calls to the questions table in the database.
+"""
 class Questions():
+    """
+    This static method searches the database for the category provided in the
+    parameter. It then returns the question attribute for the category.
+    @param string category
+    @return string question
+    """
     @staticmethod
     def get_from_category(category):
         db = get_db()
@@ -45,6 +80,13 @@ class Questions():
             return None
         return question
 
+    """
+    This static method searches the databse for the author provided in the
+    paramter. It then returns the question attribute for the author.
+    @param string author email
+    @return string question
+    """
+    @staticmethod
     def get_from_author(author):
         db = get_db()
         question = db.execute(
@@ -54,6 +96,15 @@ class Questions():
             return None
         return question
 
+    """
+    This static method searches the databse for rows that contain both the
+    author and the category provided by the paramters. It then returns the
+    question attribute that matches the search.
+    @param string author email
+    @param string category
+    @return string question
+    """
+    @staticmethod
     def get_from_both(author, category):
         db = get_db()
         question = db.execute(
@@ -63,6 +114,10 @@ class Questions():
             return None
         return question
 
+    """
+    This static method creates a list of all the categories in the database.
+    @return list of string categories
+    """
     def get_categories():
         db = get_db()
         db_call = db.execute(
@@ -78,15 +133,14 @@ class Questions():
             return None
         return category
 
-    def get():
-        db = get_db()
-        question = db.execute(
-            "SELECT question FROM questions"
-        ).fetchall()
-        if not question:
-            return None
-        return question
-
+    """
+    This static method creates a new row in the databse for all of the question
+    attributes including the author's email, category, and question in its
+    raw form.
+    @param string author email
+    @param string category
+    @param string question 
+    """
     @staticmethod
     def create(author, category, question):
         db = get_db()

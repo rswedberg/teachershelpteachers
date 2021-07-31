@@ -1,15 +1,22 @@
 import unittest
 from db import get_db
-from flask import current_app, url_for
+from flask import current_app
 from app import app, create_app
-from db_execute import Questions 
+from db_execute import Questions
 
 class TestComponent(unittest.TestCase):
     def setUp(self):
+        # Set attributes
         self.app = create_app()
         self.app_context = self.app.test_request_context()
         self.app_context.push()
         self.client = self.app.test_client(use_cookies=True)
+        # Set values to be stored in database
+        db_author = "test.email"
+        db_category = "test category"
+        db_question = "String s = @A;---A, str, hi"
+        # Call method to be tested
+        Questions.create(db_author, db_category, db_question)
 
     # Test to verify redirect to login page
     def test_index(self):
@@ -81,13 +88,6 @@ class TestComponent(unittest.TestCase):
         }, follow_redirects=True)
         # Look for string in html to verify previewed code looks as expected
         self.assertIn(b'saved', response.data)
-        # Clear database of test values
-        db_category = "test category"
-        db = get_db()
-        db.execute(
-            "DELETE FROM questions WHERE category = ?", (db_category,)
-        )
-        db.commit()
 
     # Test to verify search is given for the retrieve page
     def test_retrieve_view(self):
@@ -100,11 +100,6 @@ class TestComponent(unittest.TestCase):
 
     # Test retrieve route for category only
     def test_create_retrieve_cat(self):
-        # Store values in databse to be retrieved in test
-        db_author = "test.email"
-        db_category = "test category"
-        db_question = "String s = @A;---A, str, hi"
-        Questions.create(db_author, db_category, db_question)
         # Initiate app to run
         tester = app.test_client(self)
         # Run post request for /create route passing values for all request.form
@@ -114,20 +109,9 @@ class TestComponent(unittest.TestCase):
         }, follow_redirects=True)
         # Look for string in html to verify previewed code looks as expected
         self.assertIn(b'^^^^', response.data)
-        # Clear databse of test values
-        db = get_db()
-        db.execute(
-            "DELETE FROM questions WHERE category = ?", (db_category,)
-        )
-        db.commit()
 
     # Test retrieve route for author only
     def test_create_retrieve_author(self):
-        # Store values in databse to be retrieved in test
-        db_author = "test.email"
-        db_category = "test category"
-        db_question = "String s = @A;---A, str, hi"
-        Questions.create(db_author, db_category, db_question)
         # Initiate app to run
         tester = app.test_client(self)
         # Run post request for /create route passing values for all request.form
@@ -137,20 +121,9 @@ class TestComponent(unittest.TestCase):
         }, follow_redirects=True)
         # Look for string in html to verify previewed code looks as expected
         self.assertIn(b'^^^^', response.data)
-        # Clear databse of test values
-        db = get_db()
-        db.execute(
-            "DELETE FROM questions WHERE category = ?", (db_category,)
-        )
-        db.commit()
 
     # Test retrieve route for both category and author
     def test_create_retrieve_both(self):
-        # Store values in databse to be retrieved in test
-        db_author = "test.email"
-        db_category = "test category"
-        db_question = "String s = @A;---A, str, hi"
-        Questions.create(db_author, db_category, db_question)
         # Initiate app to run
         tester = app.test_client(self)
         # Run post request for /create route passing values for all request.form
@@ -161,20 +134,9 @@ class TestComponent(unittest.TestCase):
         }, follow_redirects=True)
         # Look for string in html to verify previewed code looks as expected
         self.assertIn(b'^^^^', response.data)
-        # Clear databse of test values
-        db = get_db()
-        db.execute(
-            "DELETE FROM questions WHERE category = ?", (db_category,)
-        )
-        db.commit()
 
     # Test that there are multiple questions retrieved
     def test_create_retrieve_multiple(self):
-        # Store values in databse to be retrieved in test
-        db_author = "test.email"
-        db_category = "test category"
-        db_question = "String s = @A;---A, str, hi"
-        Questions.create(db_author, db_category, db_question)
         # Initate app to run
         tester = app.test_client(self)
         # Run post request for /retrieve route to verify multiple questions
@@ -185,18 +147,18 @@ class TestComponent(unittest.TestCase):
         }, follow_redirects=True)
         # Look for string in html to verify 3 questions
         self.assertIn(b'String s = hi;\n^^^^^^^\nString s = hi;\n^^^^^^^\nString s = hi;\n^^^^^^^\n', response.data)
-        # Clear databse of test values
-        db = get_db()
-        db.execute(
-            "DELETE FROM questions WHERE category = ?", (db_category,)
-        )
-        db.commit()
 
     # Test that app exists
     def test_app_exists(self):
         self.assertFalse(current_app is None)
 
     def tearDown(self):
+        db_category = "test category"
+        db = get_db()
+        db.execute(
+            "DELETE FROM questions WHERE category = ?", (db_category,)
+        )
+        db.commit()
         self.app_context.pop()
 
 if __name__ == "__main__":

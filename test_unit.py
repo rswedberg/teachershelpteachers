@@ -1,6 +1,7 @@
 from db import get_db, close_db, init_db, init_db_command, init_app
 from db_execute import User, Questions
-from app import app, create_app, generateQuestion
+from app import app, create_app
+from function import Generator
 import unittest
 
 class TestUnit(unittest.TestCase):
