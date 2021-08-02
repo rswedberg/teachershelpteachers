@@ -24,21 +24,22 @@ font-size:38pt;}
 
  /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #333;
+  background-color: #aaa;
   overflow: hidden;
-  font-size: 38pt;}
-}
+  font-size: 38pt;
+  }
+
 
 /* Style the links inside the navigation bar */
 /* increased font size*/
 
 .topnav a {
   float: left;
-  color: #f2f2f2;
+  color: blue;
   text-align: center;
   padding: 5px 12px;
-  text-decoration: none;
-  font-size: 13px;
+  text-decoration: underline;
+  font-size: 38px;
 }
 
 /* Change the color of links on hover */
@@ -51,4 +52,19 @@ font-size:38pt;}
 .topnav a.active {
   background-color: white;
   color: black;
+}
+
+#textbox {
+  height: 30px;
+  font-size: 20pt;
+  font-family: fantasy;
+}
+
+#textarea {
+  font-size: 20pt;
+  font-family: fantasy;
+}
+
+select {
+  font-size:80px
 }
