@@ -20,7 +20,7 @@
     <option value="both">Category & Author</option>
   </select>
   <br />
-  <label for="choices"> Choose a Category: </label>
+  <label id="dropdown" for="choices"> Choose a Category: </label>
   <select name="categories" id="category_choice">
     <option disabled selected>Select Category</option>
     {% for category in categories %}
@@ -30,12 +30,12 @@
   <br />
   <p3>
     <label for="author"> Choose an author: </label>
-    <input type="text" name="author" placeholder="author">
+    <input id="textbox" type="text" name="author" placeholder="author">
   </p3>
   <br />
   <p4>
   <label for="number_of_questions"> How many questions would you like?: </label>
-  <input type="text" name="numQs" placeholder="#"></textarea>
+  <input id="textbox" type="text" name="numQs" placeholder="#"></textarea>
   <br />
   <button type="submit">Get random questions</button>
   <br />
