@@ -73,11 +73,19 @@ class Retrieve():
         author = request.form.get("author")
         data = []
         if method == 'category':
+            if category == None:
+                return render_template("errorpage.html")
             data = Questions.get_from_category(category)
         elif method == 'author':
             data = Questions.get_from_author(author)
+            if data == None:
+                return render_template("errorpage.html")
         else:
+            if category == None:
+                return render_template("errorpage.html")
             data = Questions.get_from_both(author, category)
+            if data == None:
+                return render_template("errorpage.html")
         try:
             numQs = int(request.form.get("numQs"))
         except:
