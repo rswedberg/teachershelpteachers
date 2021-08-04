@@ -19,12 +19,13 @@ import requests
 from db_execute import User, Questions
 from db import init_db_command
 
-"""
-This class contains methods for a single sign-on for Google users. It
-redirects users to choose a Google account and returns with a id, name, email,
-and profile picture.
-"""
+
 class Auth():
+    """
+    This class contains methods for a single sign-on for Google users. It
+    redirects users to choose a Google account and returns with a id, name, email,
+    and profile picture.
+    """
     # Decleare constant variables
     GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
     GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
@@ -39,12 +40,13 @@ class Auth():
     # OAuth 2 client setup
     client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
-    """
-    This method operates the login route. It redirects the user to a Google
-    interface to select the prefered Google account.
-    @return redirect to request_uri
-    """
+
     def login(self):
+        """
+        This method operates the login route. It redirects the user to a Google
+        interface to select the prefered Google account.
+        @return redirect to request_uri
+        """
         # Find out what URL to hit for Google login
         google_provider_cfg = requests.get(self.GOOGLE_DISCOVERY_URL).json()
         authorization_endpoint = google_provider_cfg["authorization_endpoint"]
@@ -58,13 +60,14 @@ class Auth():
         )
         return redirect(request_uri)
 
-    """
-    This method operates the login/callback route. It gathers user information
-    from Google, stores it in a databse, and returns to the index route
-    with a cookie session for the user.
-    @return redirect to index route
-    """
+    
     def callback(self):
+        """
+        This method operates the login/callback route. It gathers user information
+        from Google, stores it in a databse, and returns to the index route
+        with a cookie session for the user.
+        @return redirect to index route
+        """
         # Get authorization code Google sent back to you
         code = request.args.get("code")
         # Find out what URL to hit to get tokens that allow to ask for
@@ -114,10 +117,11 @@ class Auth():
         # Send user back to index (homepage)
         return redirect("/")
 
-    """
-    This method logs the user out by clearing the session cookie and returning
-    to the index route.
-    """
+    
     def logout():
+        """
+        This method logs the user out by clearing the session cookie and returning
+        to the index route.
+        """
         logout_user()
         return redirect("/")

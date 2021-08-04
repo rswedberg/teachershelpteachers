@@ -19,16 +19,17 @@ import requests
 # Internal imports
 from db_execute import User, Questions
 
-"""
- This class is used to opperate the routes that create the questions
- to be stored by the users.
-"""
+
 class Create():
     """
-    This method operates the post request for the create route.
-    @return confirm.html file with no variables
+    This class is used to opperate the routes that create the questions
+    to be stored by the users.
     """
     def create_post(self):
+        """
+        This method operates the post request for the create route.
+        @return confirm.html file with no variables
+        """
         question = []
         category = request.form.get("category")
         raw_question = request.form.get("code")
@@ -48,24 +49,27 @@ class Create():
             Questions.create(user, category, raw_question)
             return render_template("confirm.html")
 
-"""
-This class is used to opperate the routes that retrieve questions that have
-been stored in the database by users.
-"""
+
 class Retrieve():
     """
-    This method opperates a get request for the retrieve route.
-    @return retrieve.html file with a list of categories
+    This class is used to opperate the routes that retrieve questions that have
+    been stored in the database by users.
     """
+    
     def retrieve_get(self):
+        """
+        This method opperates a get request for the retrieve route.
+        @return retrieve.html file with a list of categories
+        """
         categories = Questions.get_categories()
         return render_template("retrieve.html", categories=categories)
 
-    """
-    This method opperates a post request for the retrieve route.
-    @return retrieve.html files with a string of questions and a list of categories
-    """
+
     def retrieve_post(self):
+        """
+        This method opperates a post request for the retrieve route.
+        @return retrieve.html files with a string of questions and a list of categories
+        """
         # POST
         categories = Questions.get_categories()
         method = request.form.get("search_method")
@@ -98,23 +102,24 @@ class Retrieve():
         #questions = [data[0], str(data), type(data), len(data)]
         return render_template("retrieve.html", questions=questions, categories=categories)
 
-"""
-This class contains a method that generates questions with random values
-from questions in their raw format and parameters for the variables.
-"""
+
 class Generator():
     """
-    This method takes a string that contains a template for a raw question. The
-    template must contain @ to identify variables for randomness, --- to
-    separate the template from the paramters, and parameters for each identified
-    variable. The method replaces the random variables with values that adhere
-    to the parameters and stores it as a string. The method has the capability
-    to make any number of the same type of question with different values for
-    each random variable.
-    @param string of question template
-    @return string of completed questions
+    This class contains a method that generates questions with random values
+    from questions in their raw format and parameters for the variables.
     """
     def generateQuestion(template):
+        """
+        This method takes a string that contains a template for a raw question. The
+        template must contain @ to identify variables for randomness, --- to
+        separate the template from the paramters, and parameters for each identified
+        variable. The method replaces the random variables with values that adhere
+        to the parameters and stores it as a string. The method has the capability
+        to make any number of the same type of question with different values for
+        each random variable.
+        @param string of question template
+        @return string of completed questions
+        """
         try:
             template = template.split("---")
             question = template[0]
