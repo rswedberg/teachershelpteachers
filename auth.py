@@ -60,7 +60,7 @@ class Auth():
         )
         return redirect(request_uri)
 
-    
+
     def callback(self):
         """
         This method operates the login/callback route. It gathers user information
@@ -117,8 +117,8 @@ class Auth():
         # Send user back to index (homepage)
         return redirect("/")
 
-    
-    def logout():
+
+    def logout(self):
         """
         This method logs the user out by clearing the session cookie and returning
         to the index route.
