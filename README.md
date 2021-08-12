@@ -28,24 +28,10 @@ To run the application, use flask with a HTTPS connection.
 flask run --cert=adhoc
 ```
 
-## Usage
-
-
-## Support
-
-
-## Roadmap
-
-
-## Contributing
-
-
-## License
-
-
 ## Project Status
+Complete
 
 ## Release Notes
-The entire application is working with all features behaving according to the 
+The entire application is working with all features behaving according to the
 user stories and automated test available to verify all application routes.
-The next step to be done is to deploy the app on Heroku.
+The entire application is also deployed and working in Heroku.
