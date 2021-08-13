@@ -55,7 +55,7 @@ class Retrieve():
     This class is used to opperate the routes that retrieve questions that have
     been stored in the database by users.
     """
-    
+
     def retrieve_get(self):
         """
         This method opperates a get request for the retrieve route.
